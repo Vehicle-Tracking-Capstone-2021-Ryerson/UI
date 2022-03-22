@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
-#from mainpage import *
+import mainpage
+import time
 
 # Top level window
 frame = tk.Tk()
@@ -17,11 +18,16 @@ label1.pack()
 lbl.pack()
 label2.pack()
 
+def Close():
+    frame.destroy()
+
 def printInput():
     inp = inputtxt.get(1.0, "end-1c")
     if(inp == "password"):
         lbl2.config(text = "Provided Input: Success")
-        #mainpage()
+        time.sleep(1)
+        Close()
+        mainpage.main()
     else:
         lbl2.config(text = "User PIN not valid. Please enter a valid PIN")
 

@@ -101,6 +101,28 @@
 # Button(win, text="Show/Hide", command=on_click).pack()
 
 # win.mainloop()
+from tkinter import *
+from unicodedata import is_normalized  
+from PIL import ImageTk,Image
+from matplotlib.font_manager import is_opentype_cff_font
+import time
 
+root = Tk()  
+root.title("main page") #the title of the window
 
+def clock():
+    hour = time.strftime("%H")
+    minute = time.strftime("%M")
+    second = time.strftime("%S")
+    
+    mylabel.config(text = (hour + ":" + minute + ":" + second))
+    mylabel.after(1000, clock)
+def update():
+    my_label.config(text="New Text")
+    
+mylabel = Label(root, text="", font=("Helvetica", 30))
+mylabel.pack(pady=20,anchor = CENTER)
 
+clock()
+
+root.mainloop() 
