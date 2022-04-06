@@ -23,7 +23,7 @@ def Close():
 
 def printInput():
     inp = inputtxt.get(1.0, "end-1c")
-    if(inp == "password"):
+    if(inp == "password" or inp == "test" or inp == "1"):
         lbl2.config(text = "Provided Input: Success")
         time.sleep(1)
         Close()
@@ -38,7 +38,7 @@ inputtxt.pack()
   
 # Button Creation
 printButton = tk.Button(frame, text = "Enter", command = printInput)
-printButton.pack()
+printButton.pack(pady = 20)
 
 lbl2 = tk.Label(frame, text = "")
 lbl2.pack()

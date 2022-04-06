@@ -101,6 +101,7 @@
 # Button(win, text="Show/Hide", command=on_click).pack()
 
 # win.mainloop()
+'''
 from tkinter import *
 from unicodedata import is_normalized  
 from PIL import ImageTk,Image
@@ -126,3 +127,12 @@ mylabel.pack(pady=20,anchor = CENTER)
 clock()
 
 root.mainloop() 
+'''
+
+import mainpage
+import speeding
+import accidentDet
+#mainpage.main()
+speeding.speed()
+
+print("hello world")

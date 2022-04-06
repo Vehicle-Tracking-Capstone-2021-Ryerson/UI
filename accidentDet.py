@@ -9,7 +9,7 @@ def accident():
     #Create an instance of tkinter frame
     root= tk.Tk()
     root.title("Accident Detection")
-    root.geometry("400x200")
+    root.geometry("450x200")
     
     s = Style()
     s.configure('My.TFrame', background='red')
