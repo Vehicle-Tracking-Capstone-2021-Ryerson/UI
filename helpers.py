@@ -80,6 +80,11 @@ def initConn(username: str, password: str):
 
     return s
 
+"""
+Helper function to send accident/begin recording command
+
+TAKES IN INIT CONN SOCKET!!
+"""
 def beginRecord(s: socket.socket):
     s.send(b"acc")
 
