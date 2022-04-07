@@ -13,15 +13,15 @@ def main():
     root.title("main page") #the title of the window
      
     def clock():
-    	hour = time.strftime("%H")
-    	minute = time.strftime("%M")
-    	second = time.strftime("%S")
-    	day = time.strftime("%d")
-    	month = time.strftime("%B")
-    	year = time.strftime("%Y")
-    	mylabel.config(text = (hour + ":" + minute + ":" + second))
-    	mydate.config(text = (day + " " + month + ", " + year))
-    	mylabel.after(1000, clock)
+      hour = time.strftime("%H")
+      minute = time.strftime("%M")
+      second = time.strftime("%S")
+      day = time.strftime("%d")
+      month = time.strftime("%B")
+      year = time.strftime("%Y")
+      mylabel.config(text = (hour + ":" + minute + ":" + second))
+      mydate.config(text = (day + " " + month + ", " + year))
+      mylabel.after(1000, clock)
         
     mylabel = Label(root, width = 0, height=0, text="", font=("Helvetica", 12))
     mylabel.place(x=400, y=0, anchor = N) #grid(row = 0, column = 1)    
