@@ -1,7 +1,5 @@
 from tkinter import *
-from unicodedata import is_normalized  
 from PIL import ImageTk,Image
-from matplotlib.font_manager import is_opentype_cff_font
 import time
 import speeding
 import accidentDet
@@ -35,49 +33,74 @@ def main():
     
     
     
-    
-    def gps():    	
-    	labelgps.config(text = ("[GPS]Latitude: " +str(var["lat"]) + "\nLongitude: " +str(var["lon"]) + "\nStreet: " + str(var["street"]) + "\nspeed: " + str(var["speed"]) + "\nTime: " +str(var["time"]) ))
+    def gps():
+      var = helpers.getLastGPSPoint()
+      labelgps = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
+      labelgps.config(text = ("[GPS]Latitude: " +str(var["lat"]) + "\nLongitude: " +str(var["lon"]) + "\nStreet: " + str(var["street"]) + "\nspeed: " + str(var["speed"]) + "\nTime: " +str(var["time"]) ))
+      labelgps.place(x=30, y=40)#grid(row = 2, column = 0,pady = 10)
+      labelgps.after(1000, gps)
+
+
     
     def blindspotF():
-    	labelblindspotF.config(text = ("[Front]Data: " + str(var2a["data"]) +" -- "+ str(var2a["time"]) ))
-    	if (var2a["data"] < 60):
-          canvas.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
-          show = False
-    	else:
+      var2a = helpers.getLastBlindspot(posa)
+      labelblindspotF.config(text = ("[Front]Data: " + str(var2a["data"]) +" -- "+ str(var2a["time"]) ))
+      if (int(var2a["data"]) < 60):
+            canvas.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
+            show = False
+      else:
           canvas.itemconfig(1, state='normal')
           show = True
+      labelblindspotF.place(x=30, y=135)
+      labelblindspotF.after(1000, blindspotF)
+
     	     	
     def blindspotB():
-    	labelblindspotB.config(text = ("[Back]Data: " + str(var2b["data"]) +" -- "+ str(var2b["time"]) ))
-    	if (var2b["data"] < 60):
+      var2b = helpers.getLastBlindspot(posb)
+      labelblindspotB.config(text = ("[Back]Data: " + str(var2b["data"]) +" -- "+ str(var2b["time"]) ))
+      if (int(var2b["data"]) < 60):
           canvas2.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
           show = False
-    	else:
+      else:
           canvas2.itemconfig(1, state='normal')
-          show = True    	
+          show = True
+      labelblindspotB.place(x=30, y=158)#grid(row = 4, column = 0,pady = 10)
+      labelblindspotB.after(1000, blindspotB)      
+         	
 
     def blindspotL():
-    	labelblindspotL.config(text = ("[Left]Data: " + str(var2c["data"]) +" -- "+ str(var2c["time"]) ))
-    	if (var2c["data"] < 60):
+      var2c = helpers.getLastBlindspot(posc)
+      labelblindspotL.config(text = ("[Left]Data: " + str(var2c["data"]) +" -- "+ str(var2c["time"]) ))
+      if (int(var2c["data"]) < 60):
           canvas3.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
           show = False
-    	else:
+      else:
           canvas3.itemconfig(1, state='normal')
           show = True
+      labelblindspotL.place(x=30, y=181)#grid(row = 3, column = 1,padx=10)
+      labelblindspotL.after(1000, blindspotL)
           
     def blindsportR():
-    	labelblindspotR.config(text = ("[Right]Data: " + str(var2d["data"]) +" -- "+ str(var2d["time"]) ))
-    	if (var2d["data"] < 60):
-          canvas4.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
-          show = False
-    	else:
-          canvas4.itemconfig(1, state='normal')
-          show = True
+      var2d = helpers.getLastBlindspot(posd)
+      labelblindspotR.config(text = ("[Right]Data: " + str(var2d["data"]) +" -- "+ str(var2d["time"]) ))
+      if (int(var2d["data"]) < 60):
+            canvas4.itemconfig(1, state='hidde')
+            shoe = False
+      else:
+            canvas4.itemconfig(1, state='normal')
+            show = True
+      labelblindspotR.place(x=30, y=204)#grid(row = 4, column = 1,pady = 20,padx=10)
+      labelblindspotR.after(1000, blindsportR)
+            
     
     def OBD():
-    	labelOBD.config(text = ("[OBD]RPM: " + str(var3["rpm"]) + "\nSpeed: " + str(var3["speed"]) + "\nThrottle: " + str(var3["throttle"]) + "\nAirTemp: " + str(var3["airTemp"]) + "\nFuel: " + str(var3["fuel"]) + "\nTime: " +str(var["time"])  ))
-      
+      var3 = helpers.getLastOBD()
+      labelOBD = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
+      labelOBD.config(text = ("[OBD]RPM: " + str(var3["rpm"]) + "\nSpeed: " + str(var3["speed"]) + "\nThrottle: " + str(var3["throttle"]) + "\nAirTemp: " + str(var3["airTemp"]) + "\nFuel: " + str(var3["fuel"]) + "\nTime: " +str(var3["time"])  ))
+      labelOBD.place(x=30, y=230)#grid(row = 5, column = 0,pady = 10)
+      labelOBD.after(1000, OBD)  
+
+
     posa = "F"
     posb = "B"
     posc = "L"
@@ -133,7 +156,8 @@ def main():
     #canvas = Canvas(root, width = 800, height = 400) #the overall size of the window    
     root.geometry("800x400")
     #root.configure(bg='yellow')
-    canvas1 = Label(root, text="Welcome User: Riel") #included a text at the bottom of the window
+    canvas1 = Label(root, text="Welcome User: Riel")
+    #") #included a text at the bottom of the window
     #canvas.pack()#grid(row = 7, column = 3)#we are uploading it to the window
     canvas1.place(x=335, y=370)#grid(row = 6, column = 1)#we are uploading it to the window 
     
