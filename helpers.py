@@ -1,4 +1,6 @@
 import requests
+import socket
+import time
 """
 These are functions to help make requests to our local data server running alongside the superscript
 """
@@ -57,3 +59,33 @@ def getLastOBD():
     r = getDataFromEndpoint("getLastOBD")
     obdDict = r.json()
     return obdDict
+
+"""
+Function for initiating connection with superscript
+
+Returns a socket that you can then use to send commands to the superscript via s.send
+
+COMMANDS MUST BE STRING ENCONDED
+"""
+
+def initConn(username: str, password: str):
+    s = socket.socket()
+    port = 4000 # Superscript port
+    s.connect(('127.0.0.1', port))
+
+    s.send(username.encode())
+    #password = input()
+    s.send(password.encode())
+
+    return s
+
+"""
+Helper function to send accident/begin recording command
+
+TAKES IN INIT CONN SOCKET!!
+"""
+def beginRecord(s):
+    s.send(b"acc")
+
+def endSession(s):
+    s.send(b"end")

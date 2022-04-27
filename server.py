@@ -7,8 +7,8 @@ from google.cloud import storage
 api = Flask(__name__)
 
 gpsData = [{"lat": 1, "lon": 1, "street": "hello", "speed": 100, "time": datetime.now()}]
-blindspotData = {"F": [{"data": 90, "time": datetime.now()}], "B": [{"data": 50, "time": datetime.now()}], "L": [{"data": 90, "time": datetime.now()}], "R":[{"data": 50, "time": datetime.now()}]}
-obdData = [{"rpm": 100, "speed": 1, "throttle": 100, "airTemp": 100.0, "fuel": 100.0, "time": datetime.now()}]
+blindspotData = {"F": [{"data": 90, "time": datetime.now()}], "B": [{"data": 90, "time": datetime.now()}], "L": [{"data": 90, "time": datetime.now()}], "R":[{"data": 90, "time": datetime.now()}]}
+obdData = [{"rpm": 110, "speed": 1, "throttle": 100, "airTemp": 100.0, "fuel": 100.0, "time": datetime.now()}]
 
 @api.route("/", methods=["GET"])
 def home():
