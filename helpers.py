@@ -75,6 +75,7 @@ def initConn(username: str, password: str):
 
     s.send(username.encode())
     #password = input()
+    time.sleep(0.5)
     s.send(password.encode())
 
     return s

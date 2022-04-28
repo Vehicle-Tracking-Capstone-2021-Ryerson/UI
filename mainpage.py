@@ -237,11 +237,11 @@ def main(s): #s
           show = True'''
               
     #Recording
-    Butt1 = Button(root, text="Record", command=helpers.beginRecord(s))
+    Butt1 = Button(root, text="Record", command= lambda: helpers.beginRecord(s))
     Butt1.pack(anchor = E, pady = 75 )
     
     #Ending session
-    Butt2 = Button(root, text="END SESSION", command=helpers.endSession(s))
+    Butt2 = Button(root, text="END SESSION", command= lambda: helpers.endSession(s))
     Butt2.pack(anchor = E, pady = 30 )
         
     '''
