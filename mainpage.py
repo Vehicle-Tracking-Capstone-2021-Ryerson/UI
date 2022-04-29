@@ -4,24 +4,27 @@ import time
 import speeding
 import accidentDet
 import helpers
+import socket
 
 show = True
     
-def main():
-       
+def main(s): #s
+    
+    #print("TEST" + s)  
+     
     root = Tk()  
     root.title("main page") #the title of the window
      
     def clock():
-    	hour = time.strftime("%H")
-    	minute = time.strftime("%M")
-    	second = time.strftime("%S")
-    	day = time.strftime("%d")
-    	month = time.strftime("%B")
-    	year = time.strftime("%Y")
-    	mylabel.config(text = (hour + ":" + minute + ":" + second))
-    	mydate.config(text = (day + " " + month + ", " + year))
-    	mylabel.after(1000, clock)
+      hour = time.strftime("%H")
+      minute = time.strftime("%M")
+      second = time.strftime("%S")
+      day = time.strftime("%d")
+      month = time.strftime("%B")
+      year = time.strftime("%Y")
+      mylabel.config(text = (hour + ":" + minute + ":" + second))
+      mydate.config(text = (day + " " + month + ", " + year))
+      mylabel.after(1000, clock)
         
     mylabel = Label(root, width = 0, height=0, text="", font=("Helvetica", 12))
     mylabel.place(x=400, y=0, anchor = N) #grid(row = 0, column = 1)    
@@ -29,10 +32,8 @@ def main():
     mydate.place(x=393, y=20, anchor = N) #grid(row = 1, column = 1)
     
     clock()    
-    
-    
-    
-    
+#----------------------------------------------------------------------------------    
+        
     def gps():
       var = helpers.getLastGPSPoint()
       labelgps = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
@@ -98,8 +99,22 @@ def main():
       labelOBD = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
       labelOBD.config(text = ("[OBD]RPM: " + str(var3["rpm"]) + "\nSpeed: " + str(var3["speed"]) + "\nThrottle: " + str(var3["throttle"]) + "\nAirTemp: " + str(var3["airTemp"]) + "\nFuel: " + str(var3["fuel"]) + "\nTime: " +str(var3["time"])  ))
       labelOBD.place(x=30, y=230)#grid(row = 5, column = 0,pady = 10)
-      labelOBD.after(1000, OBD)  
+      #speed()#///////////////
+      #accid()#///////////////    	      
+      labelOBD.after(1000, OBD)
 
+    #         OBD              GPS
+    #        111               100
+    #         10               100
+    #def speed():
+    #	var = helpers.getLastGPSPoint()
+    #	var3 = helpers.getLastOBD()
+    #	if (var3["speed"] > (var["speed"])):
+    #		speeding.speed(var3["speed"])
+    #def accid():
+    #	if (var3["rpm"] == 0):
+    #		print(var3["rpm"])
+    #		accidentDet.accident() 
 
     posa = "F"
     posb = "B"
@@ -148,18 +163,15 @@ def main():
     labelOBD.place(x=30, y=230)#grid(row = 5, column = 0,pady = 10)
     labelOBD.after(1000, OBD)    
     
-    
-    
-    
-    
+#-----------------------------------------------------------        
     #800 400
     #canvas = Canvas(root, width = 800, height = 400) #the overall size of the window    
     root.geometry("800x400")
     #root.configure(bg='yellow')
-    canvas1 = Label(root, text="Welcome User: Riel")
+    canvas1 = Label(root, text="Welcome User - AA02")
     #") #included a text at the bottom of the window
     #canvas.pack()#grid(row = 7, column = 3)#we are uploading it to the window
-    canvas1.place(x=335, y=370)#grid(row = 6, column = 1)#we are uploading it to the window 
+    canvas1.place(x=350, y=370)#grid(row = 6, column = 1)#we are uploading it to the window 
     
     
     canvas = Canvas(root, width = 80, height=60)    
@@ -170,8 +182,7 @@ def main():
     canvas3.place(x=500,y=155)
     canvas4 = Canvas(root, width = 60, height=80)    
     canvas4.place(x=670,y=155)         
-    
-       
+           
 #-------------------------------------------------------------   
     carimage = Image.open("car.png") #getting the image car
     car1 = carimage.rotate(270, expand=True) #we care rotating it and fitting the whole IMAGE
@@ -210,7 +221,29 @@ def main():
     waveD3 = waveD2.resize((int(waveD2.size[0]/3),int(waveD2.size[1]/3)), 0)
     img5 = ImageTk.PhotoImage(waveD3)
     canvas4.create_image(30, 40, anchor = CENTER, image = img5) 
+
+    '''def on_click1top():
+       global show
+       # Determine if the image is hidden or not
+       if (show == True):#if the show == true then run the programm
+          #while(show == True):
+          canvas.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = top wave 3=back wave etc )
+              #time.sleep(2)
+              #canvas.itemconfig(2, state='normal')
+              #time.sleep(2)
+          show = False
+       else:#if the show == fale then run the program
+          canvas.itemconfig(1, state='normal')
+          show = True'''
+              
+    #Recording
+    Butt1 = Button(root, text="Record", command=helpers.beginRecord(s))
+    Butt1.pack(anchor = E, pady = 75 )
     
+    #Ending session
+    Butt2 = Button(root, text="END SESSION", command=helpers.endSession(s))
+    Butt2.pack(anchor = E, pady = 30 )
+        
     '''
     def on_click1top():
        global show
