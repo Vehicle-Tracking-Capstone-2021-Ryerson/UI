@@ -8,7 +8,7 @@ import socket
 
 show = True
     
-def main(s): #s
+def main(): #s
     
     #print("TEST" + s)  
      
@@ -37,7 +37,7 @@ def main(s): #s
     def gps():
       var = helpers.getLastGPSPoint()
       labelgps = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
-      labelgps.config(text = ("[GPS]Latitude: " +str(var["lat"]) + "\nLongitude: " +str(var["lon"]) + "\nStreet: " + str(var["street"]) + "\nspeed: " + str(var["speed"]) + "\nTime: " +str(var["time"]) ))
+      labelgps.config(text = ("[GPS]Latitude: " +str(var["lat"]) + "\nLongitude: " +str(var["lon"]) + "\nStreet: " + str(var["street"]) + "\nspeed: " + str(var["speed"]) + "\nTime: " +str(var["time"]) + "                                           " ))
       labelgps.place(x=30, y=40)#grid(row = 2, column = 0,pady = 10)
       labelgps.after(1000, gps)
 
@@ -45,7 +45,7 @@ def main(s): #s
     
     def blindspotF():
       var2a = helpers.getLastBlindspot(posa)
-      labelblindspotF.config(text = ("[Front]Data: " + str(var2a["data"]) +" -- "+ str(var2a["time"]) ))
+      labelblindspotF.config(text = ("             [Front]     Data: " + str(var2a["data"]) +"      "+ str(var2a["time"]) ))
       if (int(var2a["data"]) < 60):
             canvas.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
             show = False
@@ -58,7 +58,7 @@ def main(s): #s
     	     	
     def blindspotB():
       var2b = helpers.getLastBlindspot(posb)
-      labelblindspotB.config(text = ("[Back]Data: " + str(var2b["data"]) +" -- "+ str(var2b["time"]) ))
+      labelblindspotB.config(text = ("             [Back]     Data: " + str(var2b["data"]) +"      "+ str(var2b["time"]) ))
       if (int(var2b["data"]) < 60):
           canvas2.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
           show = False
@@ -71,7 +71,7 @@ def main(s): #s
 
     def blindspotL():
       var2c = helpers.getLastBlindspot(posc)
-      labelblindspotL.config(text = ("[Left]Data: " + str(var2c["data"]) +" -- "+ str(var2c["time"]) ))
+      labelblindspotL.config(text = ("             [Left]       Data: " + str(var2c["data"]) +"      "+ str(var2c["time"]) ))
       if (int(var2c["data"]) < 60):
           canvas3.itemconfig(1, state='hidden')  #(the layers of the canvas since 1 = the car 2 = 
           show = False
@@ -83,7 +83,7 @@ def main(s): #s
           
     def blindsportR():
       var2d = helpers.getLastBlindspot(posd)
-      labelblindspotR.config(text = ("[Right]Data: " + str(var2d["data"]) +" -- "+ str(var2d["time"]) ))
+      labelblindspotR.config(text = ("             [Right]    Data: " + str(var2d["data"]) +"      "+ str(var2d["time"]) ))
       if (int(var2d["data"]) < 60):
             canvas4.itemconfig(1, state='hidde')
             shoe = False
@@ -92,15 +92,17 @@ def main(s): #s
             show = True
       labelblindspotR.place(x=30, y=204)#grid(row = 4, column = 1,pady = 20,padx=10)
       labelblindspotR.after(1000, blindsportR)
+       
+       
             
     
     def OBD():
       var3 = helpers.getLastOBD()
       labelOBD = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
-      labelOBD.config(text = ("[OBD]RPM: " + str(var3["rpm"]) + "\nSpeed: " + str(var3["speed"]) + "\nThrottle: " + str(var3["throttle"]) + "\nAirTemp: " + str(var3["airTemp"]) + "\nFuel: " + str(var3["fuel"]) + "\nTime: " +str(var3["time"])  ))
+      labelOBD.config(text = ("[OBD]RPM: " + str(var3["rpm"]) + "\nSpeed: " + str(var3["speed"]) + "\nThrottle: " + str(var3["throttle"]) + "\nAirTemp: " + str(var3["airTemp"]) + "\nFuel: " + str(var3["fuel"]) + "\nTime: " +str(var3["time"])  + "                                           "))
       labelOBD.place(x=30, y=230)#grid(row = 5, column = 0,pady = 10)
-      #speed()#///////////////
-      #accid()#///////////////    	      
+    #  speed()#///////////////
+    #  accid()#///////////////    	      
       labelOBD.after(1000, OBD)
 
     #         OBD              GPS
@@ -142,19 +144,19 @@ def main(s): #s
     labelgps.after(1000, gps)
     
     
-    labelblindspotF = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
+    labelblindspotF = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1,  justify = "left")
     labelblindspotF.place(x=30, y=135)#grid(row = 3, column = 0)
     labelblindspotF.after(1000, blindspotF)
     
-    labelblindspotB = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
+    labelblindspotB = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1,  justify = "left")
     labelblindspotB.place(x=30, y=158)#grid(row = 4, column = 0,pady = 10)
     labelblindspotB.after(1000, blindspotB)
     
-    labelblindspotL = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
+    labelblindspotL = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1,  justify = "left")
     labelblindspotL.place(x=30, y=181)#grid(row = 3, column = 1,padx=10)
     labelblindspotL.after(1000, blindspotL)
     
-    labelblindspotR = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
+    labelblindspotR = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, justify = "left")
     labelblindspotR.place(x=30, y=204)#grid(row = 4, column = 1,pady = 20,padx=10)
     labelblindspotR.after(1000, blindsportR)
 
@@ -237,11 +239,11 @@ def main(s): #s
           show = True'''
               
     #Recording
-    Butt1 = Button(root, text="Record", command=helpers.beginRecord(s))
+    Butt1 = Button(root, text="Record", command=lambda: helpers.beginRecord(s))
     Butt1.pack(anchor = E, pady = 75 )
     
     #Ending session
-    Butt2 = Button(root, text="END SESSION", command=helpers.endSession(s))
+    Butt2 = Button(root, text="END SESSION", command=lambda: helpers.endSession(s))
     Butt2.pack(anchor = E, pady = 30 )
         
     '''
