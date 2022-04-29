@@ -99,22 +99,22 @@ def main(s): #s
       labelOBD = Label(root, width = 0, height=0, text="", font=("Helvetica", 12), bd = 1, relief = "sunken", justify = "left")
       labelOBD.config(text = ("[OBD]RPM: " + str(var3["rpm"]) + "\nSpeed: " + str(var3["speed"]) + "\nThrottle: " + str(var3["throttle"]) + "\nAirTemp: " + str(var3["airTemp"]) + "\nFuel: " + str(var3["fuel"]) + "\nTime: " +str(var3["time"])  ))
       labelOBD.place(x=30, y=230)#grid(row = 5, column = 0,pady = 10)
-      speed()#///////////////
-      accid()#///////////////    	      
+      #speed()#///////////////
+      #accid()#///////////////    	      
       labelOBD.after(1000, OBD)
 
     #         OBD              GPS
     #        111               100
     #         10               100
-    def speed():
-    	var = helpers.getLastGPSPoint()
-    	var3 = helpers.getLastOBD()
-    	if (var3["speed"] > (var["speed"])):
-    		speeding.speed(var3["speed"])
-    def accid():
-    	if (var3["rpm"] == 0):
-    		print(var3["rpm"])
-    		accidentDet.accident() 
+    #def speed():
+    #	var = helpers.getLastGPSPoint()
+    #	var3 = helpers.getLastOBD()
+    #	if (var3["speed"] > (var["speed"])):
+    #		speeding.speed(var3["speed"])
+    #def accid():
+    #	if (var3["rpm"] == 0):
+    #		print(var3["rpm"])
+    #		accidentDet.accident() 
 
     posa = "F"
     posb = "B"
@@ -237,11 +237,11 @@ def main(s): #s
           show = True'''
               
     #Recording
-    Butt1 = Button(root, text="Record", command= lambda: helpers.beginRecord(s))
+    Butt1 = Button(root, text="Record", command=helpers.beginRecord(s))
     Butt1.pack(anchor = E, pady = 75 )
     
     #Ending session
-    Butt2 = Button(root, text="END SESSION", command= lambda: helpers.endSession(s))
+    Butt2 = Button(root, text="END SESSION", command=helpers.endSession(s))
     Butt2.pack(anchor = E, pady = 30 )
         
     '''
