@@ -8,7 +8,7 @@ import socket
 
 show = True
     
-def main(): #s
+def main(s): #s
     
     #print("TEST" + s)  
      
